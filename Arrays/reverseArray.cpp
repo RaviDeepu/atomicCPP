@@ -1,56 +1,50 @@
 #include<iostream>
-
+#include"quickSort.cpp"
 
 using namespace std;
 
 
-void reverseArraySwap(int a[], int n)
+
+void reverseArray(int a[], int n)
 {
+    int i=0;
+    int j=n-1;
+    int temp;
 
-    int start=0, end=n-1;
-
-    while(start < end)
+    while(i < j)
     {
-        int temp = a[start];
-        a[start] = a[end];
-        a[end] = temp;
-        ++start;
-        --end;
+        temp = a[i];
+        a[i] = a[j];
+        a[j] = temp;
+        i++;
+        j--;
     }
 }
 
-void reverseArrayRecursive(int a[], int start, int end)
+
+// Reverse Array - Recursive;
+
+void reverseArray_Recursive(int a[], int start, int end)
 {
+    int temp;
     if(start >= end)
         return;
-    reverseArrayRecursive(a,start+1,end-1);
-
-    int temp = a[start];
+    temp = a[start];
     a[start] = a[end];
     a[end] = temp;
-
+    
+    reverseArray_Recursive(a, start+1, end-1);
 }
 
 int main()
 {
-    int a[]={1,2,3,4,5,6,7};
-    int n = sizeof(a)/sizeof(a[0]);
+    int a[]={1,2,3,4,5,6};
+    int size = sizeof(a)/sizeof(a[0]);
+    cout<<"Before : ";
+    printArray(a,size);
 
-    reverseArraySwap(a,n);
+    reverseArray_Recursive(a,0,size-1);
 
-    cout<<"Reversed Array : "<<endl;
-    for(int i=0;i<n;++i)
-    {
-        cout<<a[i]<<endl;
-    }
-
-    reverseArrayRecursive(a,0,n-1);
-
-
-    cout<<"Reversed Array : "<<endl;
-    for(int i=0;i<n;++i)
-    {
-        cout<<a[i]<<endl;
-    }
-
+    cout<<"After Reverse : ";
+    printArray(a,size);
 }
